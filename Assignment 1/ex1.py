@@ -13,7 +13,10 @@ def read_system(path: pathlib.Path)-> tuple[list[list[float]], list[float]]:
           tokens = line.split()
 
           free_term = tokens[-1]
-          B.append(float(free_term))
+          if tokens[-2] == '-':
+              B.append(-float(free_term))
+          else:   
+              B.append(float(free_term))
           
           i = 0
           while i < len(tokens) - 1:
@@ -36,8 +39,6 @@ def read_system(path: pathlib.Path)-> tuple[list[list[float]], list[float]]:
                 elif tokens[i].endswith('x') or tokens[i].endswith('y') or tokens[i].endswith('z'):
                     if tokens[i][:-1] == '':
                         coefficients[coefficient_index] = 1.0
-                    elif tokens[i][:-1] == '-':
-                        coefficients[coefficient_index] = -1.0
                     else:
                         coefficients[coefficient_index] = float(tokens[i][:-1])
                     coefficient_index += 1

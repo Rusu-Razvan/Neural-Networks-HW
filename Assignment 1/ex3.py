@@ -1,16 +1,16 @@
 import ex1,ex2
 import pathlib
 
-def solve_cramer(matrix: list[list[float]], vector: list[float]) -> list[float]:
-    det = ex2.determinant(matrix)
-    if det == 0:
-        return None  
-
-    def replace_column(mat: list[list[float]], col_index: int, new_col: list[float]) -> list[list[float]]:
+def replace_column(mat: list[list[float]], col_index: int, new_col: list[float]) -> list[list[float]]:
         new_mat = [row[:] for row in mat] 
         for i in range(len(new_mat)):
             new_mat[i][col_index] = new_col[i]
         return new_mat
+
+def solve_cramer(matrix: list[list[float]], vector: list[float]) -> list[float]:
+    det = ex2.determinant(matrix)
+    if det == 0:
+        return None  
 
     solutions = []
     for i in range(len(matrix)):
